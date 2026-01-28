@@ -11,6 +11,10 @@ class MemberController extends Controller
     {
         return view('Admin.Member.indexMember');
     }
+    public function showCreateMembers()
+    {
+        return view('Admin.Member.createMember');
+    }
     /**
      * Display a listing of the resource.
      */

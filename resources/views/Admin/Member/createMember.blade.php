@@ -70,13 +70,10 @@
             </div>
 
             <div class="flex gap-3 pt-4">
-                <button
-                    type="button"
-                    onclick="hisotry.back()"
-                    class="flex-1 text-center rounded-lg border border-gray-300 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-50"
-                >
+                <a href="{{ route('Admin.Member.indexMember') }}"
+                    class="w-1/2 text-center px-5 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold border">
                     Batal
-                </button>
+                </a>
 
                 <button
                     type="submit"

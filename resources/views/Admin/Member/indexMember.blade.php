@@ -55,7 +55,7 @@
                     <h1 class="text-3xl font-bold text-gray-800">Kelola Anggota</h1>
                     <p class="text-gray-500">Manajemen data anggota perpustakaan.</p>
                 </div>
-                <a href=""
+                <a href="{{ route('Admin.Member.createMember') }}"
                     class="flex items-center bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all shadow-sm">
                     <i class="ph ph-user-plus text-xl mr-2"></i>
                     Tambah Anggota Baru

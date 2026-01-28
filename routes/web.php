@@ -41,4 +41,5 @@ Route::prefix('Transaction')->group(function () {
 // Members Routes
 Route::prefix('Member')->group(function () {
     Route::get('/', [MemberController::class, 'showIndexMembers'])->name('Admin.Member.indexMember');
+    Route::get('/CreateMember', [MemberController::class, 'showCreateMembers'])->name('Admin.Member.createMember');
 });
