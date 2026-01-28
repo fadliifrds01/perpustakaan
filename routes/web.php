@@ -30,6 +30,7 @@ Route::prefix('Book')->group(function () {
     Route::get('/', [BookController::class, 'showIndexBook'])->name('Admin.Book.indexBook');
     Route::get('/CreateBook', [BookController::class, 'showCreateBook'])->name('Admin.Book.createBook');
     Route::post('/', [BookController::class, 'createBook'])->name('Book.CreateBook');
+    Route::get('/Delete/{id}', [BookController::class, 'destroy'])->name('Book.DeleteBook');
     Route::get('/EditBook', [BookController::class, 'showEditBook'])->name('Admin.Book.editBook');
 });
 

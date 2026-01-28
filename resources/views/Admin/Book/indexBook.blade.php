@@ -102,7 +102,7 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-4">
-                                        <img src={{ 'storage/covers/ORxWVEW8ayVWh2l7VUvQrw8BlQLyRdQ22mckBUk7.jpg' }} alt="Cover Buku"
+                                        <img src={{ asset($book->cover_buku) }} alt="Cover Buku"
                                             class="object-cover rounded-sm shadow">
                                     </div>
                                 </td>
@@ -136,9 +136,12 @@
                                         <a href="{{ route('Admin.Book.editBook') }}"
                                             class="text-blue-600 hover:text-blue-800"><i
                                                 class="ph ph-pencil-line text-xl"></i></a>
-                                        <a href="" class="text-red-500 hover:text-red-600" title="Hapus">
+                                        <a href="{{ route('Book.DeleteBook', $book->id) }}"
+                                            class="text-red-500 hover:text-red-600" title="Hapus"
+                                            onclick="return confirm('Yakin ingin menghapus buku ini?')">
                                             <i class="ph ph-trash text-xl"></i>
                                         </a>
+
                                     </div>
                                 </td>
                             </tr>

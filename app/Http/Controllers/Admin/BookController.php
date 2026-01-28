@@ -11,7 +11,15 @@ class BookController extends Controller
 {
     public function showIndexBook()
     {
-        $books = BookModel::select('cover_buku', 'judul_buku', 'pengarang', 'penerbit', 'tahun_terbit', 'status')->get();
+        $books = BookModel::select(
+            'id',
+            'cover_buku',
+            'judul_buku',
+            'pengarang',
+            'penerbit',
+            'tahun_terbit',
+            'status'
+        )->get();
         return view('Admin.Book.indexBook', compact('books'));
     }
     public function showCreateBook()
@@ -43,13 +51,18 @@ class BookController extends Controller
 
         $coverName = null;
         if ($request->hasFile('cover_buku')) {
-            $coverName = $request->file('cover_buku')->store('covers', 'public');
-            $request->merge(['cover_buku' => $coverName]);
+            $file = $request->file('cover_buku');
+            $coverName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('upload'), $coverName);
         }
+        // if ($request->hasFile('cover_buku')) {
+        //     $coverName = $request->file('cover_buku')->store('covers', 'public');
+        //     $request->merge(['cover_buku' => $coverName]);
+        // }
 
 
         BookModel::create([
-            'cover_buku' => $request->cover_buku,
+            'cover_buku' => '/upload/' . $coverName,
             'judul_buku' => $request->judul_buku,
             'pengarang' => $request->pengarang,
             'penerbit' => $request->penerbit,
@@ -57,7 +70,7 @@ class BookController extends Controller
             'status' => $request->status,
         ]);
         return redirect()->route('Admin.Book.indexBook')
-                         ->with('success', 'Buku berhasil ditambahkan.');
+            ->with('success', 'Buku berhasil ditambahkan.');
     }
 
     /**
@@ -97,6 +110,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = BookModel::findOrFail($id);
+        $book->delete();
+
+        return Redirect::route('Admin.Book.indexBook')
+            ->with('success', 'Buku berhasil dihapus.');
     }
 }
