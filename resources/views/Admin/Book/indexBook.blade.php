@@ -94,55 +94,56 @@
                     </thead>
 
                     <tbody class="divide-y divide-gray-100">
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-center">
-                                1
-                            </td>
+                        @foreach ($books as $book)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-bold text-center">
+                                    {{ $loop->iteration }}
+                                </td>
 
-                            <td class="px-6 py-4">
-                                <div class="flex items-center justify-center gap-4">
-                                    <img src="https://via.placeholder.com/60x80" alt="Cover Buku"
-                                        class="w-14 h-20 object-cover rounded-md shadow">
-                                </div>
-                            </td>
-
-                            <td class="px-6 py-4">
-                                <div>
-                                    <div class="font-medium text-gray-800">
-                                        Laskar Pelangi
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-4">
+                                        <img src={{ $book->cover_buku }} alt="Cover Buku"
+                                            class="object-cover rounded-sm shadow">
                                     </div>
-                                    <div class="text-xs text-gray-400 font-mono">
-                                        ID: BUK-001
+                                </td>
+
+                                <td class="px-6 py-4">
+                                    <div>
+                                        <div class="font-medium text-gray-800">
+                                            {{ $book->judul_buku }}
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td class="px-6 py-4 text-gray-600 text-sm text-center">
-                                Andrea Hirata
-                            </td>
+                                <td class="px-6 py-4 text-gray-600 text-sm text-center">
+                                    {{ $book->pengarang }}
+                                </td>
 
-                            <td class="px-6 py-4 text-gray-600 text-sm">
-                                Bentang Pustaka
-                            </td>
+                                <td class="px-6 py-4 text-gray-600 text-sm">
+                                    {{ $book->penerbit }}
+                                </td>
 
-                            <td class="px-6 py-4 text-gray-600 text-sm text-center">
-                                2005
-                            </td>
+                                <td class="px-6 py-4 text-gray-600 text-sm text-center">
+                                    {{ $book->tahun_terbit }}
+                                </td>
 
-                            <td class="px-6 py-4 text-gray-600 text-sm text-center">
-                                Tersedia
-                            </td>
+                                <td class="px-6 py-4 text-gray-600 text-sm text-center">
+                                    {{ $book->status }}
+                                </td>
 
-                            <td class="px-6 py-4">
-                                <div class="flex justify-center gap-3">
-                                    <a href="{{ route('Admin.Book.editBook') }}" class="text-blue-600 hover:text-blue-800"><i
-                                            class="ph ph-pencil-line text-xl"></i></a>
-                                    <a href="" class="text-red-500 hover:text-red-600" title="Hapus">
-                                        <i class="ph ph-trash text-xl"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                                <td class="px-6 py-4">
+                                    <div class="flex justify-center gap-3">
+                                        <a href="{{ route('Admin.Book.editBook') }}"
+                                            class="text-blue-600 hover:text-blue-800"><i
+                                                class="ph ph-pencil-line text-xl"></i></a>
+                                        <a href="" class="text-red-500 hover:text-red-600" title="Hapus">
+                                            <i class="ph ph-trash text-xl"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+
                     </tbody>
 
                 </table>

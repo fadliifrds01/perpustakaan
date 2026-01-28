@@ -11,26 +11,42 @@
 <body class="bg-gray-100">
 
     <div class="min-h-screen flex items-center justify-center px-4">
+
         <div class="w-full max-w-md bg-white rounded-xl shadow-sm border border-gray-100 p-8">
 
             <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                Tambah Buku
+                Tambah Buku Baru
             </h2>
 
-            <form action="{{ route('Admin.Book.createBook') }}" method="POST" enctype="multipart/form-data">
+            {{-- ✅ POST ke store --}}
+            <form action="{{ route('Admin.Book.indexBook') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <!-- Judul Buku -->
+                {{-- Cover Buku --}}
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">
+                        Cover Buku
+                    </label>
+                    <input type="file" name="cover_buku"
+                        class="w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-lg file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-600
+                    hover:file:bg-blue-100">
+                </div>
+
+                {{-- Judul Buku --}}
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-gray-600 mb-2">
                         Judul Buku
                     </label>
-                    <input type="text" name="judul" value="{{ old('judul') }}"
+                    <input type="text" name="judul_buku" value="{{ old('judul_buku') }}"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         placeholder="Masukkan judul buku">
                 </div>
 
-                <!-- Pengarang -->
+                {{-- Pengarang --}}
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-gray-600 mb-2">
                         Pengarang
@@ -40,55 +56,63 @@
                         placeholder="Masukkan nama pengarang">
                 </div>
 
-                <!-- Kategori -->
+                {{-- Penerbit --}}
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-gray-600 mb-2">
-                        Kategori
+                        Penerbit
                     </label>
-                    <select name="kategori"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                        <option value="">-- Pilih Kategori --</option>
-                        <option value="Novel" {{ old('kategori') == 'Novel' ? 'selected' : '' }}>Novel</option>
-                        <option value="Pendidikan" {{ old('kategori') == 'Pendidikan' ? 'selected' : '' }}>Pendidikan</option>
-                        <option value="Teknologi" {{ old('kategori') == 'Teknologi' ? 'selected' : '' }}>Teknologi</option>
-                        <option value="Agama" {{ old('kategori') == 'Agama' ? 'selected' : '' }}>Agama</option>
+                    <input type="text" name="penerbit" value="{{ old('penerbit') }}"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        placeholder="Masukkan nama penerbit">
+                </div>
+
+                {{-- Tahun Terbit --}}
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">
+                        Tahun Terbit
+                    </label>
+                    <select name="tahun_terbit" class="w-full rounded-lg border border-gray-300 px-4 py-2">
+
+                        @for ($year = date('Y'); $year >= 1980; $year--)
+                            <option value="{{ $year }}" name="" {{ old('tahun_terbit') == $year ? 'selected' : '' }}>
+                                {{ $year }}
+                            </option>
+                        @endfor
+
                     </select>
                 </div>
 
-                <!-- Stok -->
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-600 mb-2">
-                        Stok Buku
-                    </label>
-                    <input type="number" name="stok" value="{{ old('stok') }}"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        placeholder="Jumlah stok buku">
-                </div>
-
-                <!-- Cover Buku -->
+                {{-- Status --}}
                 <div class="mb-6">
                     <label class="block text-sm font-semibold text-gray-600 mb-2">
-                        Cover Buku
+                        Status
                     </label>
-                    <input type="file" name="gambar"
-                        class="w-full text-sm text-gray-500
-                               file:mr-4 file:py-2 file:px-4
-                               file:rounded-lg file:border-0
-                               file:text-sm file:font-semibold
-                               file:bg-blue-50 file:text-blue-600
-                               hover:file:bg-blue-100">
+                    <select name="status"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+
+                        <option value="tersedia" {{ old('status') == 'tersedia' ? 'selected' : '' }}>
+                            Tersedia
+                        </option>
+
+                        <option value="dipinjam" {{ old('status') == 'dipinjam' ? 'selected' : '' }}>
+                            Dipinjam
+                        </option>
+                    </select>
                 </div>
 
-                <!-- Tombol -->
-                <div class="flex justify-between items-center gap-4">
-                    <button type="button" onclick="history.back()"
-                        class="w-1/2 text-center px-5 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition-all font-semibold border border-gray-200">
-                        Kembali
-                    </button>
+                {{-- Buttons --}}
+                <div class="flex gap-4">
+
+                    <a href="{{ route('Admin.Book.indexBook') }}"
+                        class="w-1/2 text-center px-5 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold border">
+                        Batal
+                    </a>
+
                     <button type="submit"
-                        class="w-1/2 px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-md transition-all font-semibold">
-                        Simpan Buku
+                        class="w-1/2 px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-md font-semibold">
+                        Tambah Buku
                     </button>
+
                 </div>
 
             </form>
@@ -96,4 +120,5 @@
     </div>
 
 </body>
+
 </html>

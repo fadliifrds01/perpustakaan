@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\BookModel;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     public function showIndexBook()
     {
-        return view('Admin.Book.indexBook');
+        $books = BookModel::select('cover_buku', 'judul_buku', 'pengarang', 'penerbit', 'tahun_terbit', 'status')->get();
+        return view('Admin.Book.indexBook', compact('books'));
     }
     public function showCreateBook()
     {
@@ -23,7 +25,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
