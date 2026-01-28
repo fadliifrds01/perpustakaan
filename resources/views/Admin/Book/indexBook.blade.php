@@ -102,7 +102,7 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-4">
-                                        <img src={{ $book->cover_buku }} alt="Cover Buku"
+                                        <img src={{ 'storage/covers/ORxWVEW8ayVWh2l7VUvQrw8BlQLyRdQ22mckBUk7.jpg' }} alt="Cover Buku"
                                             class="object-cover rounded-sm shadow">
                                     </div>
                                 </td>

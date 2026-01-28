@@ -29,6 +29,7 @@ Route::get('/dashboard', [DashboardController::class, 'showController'])->name('
 Route::prefix('Book')->group(function () {
     Route::get('/', [BookController::class, 'showIndexBook'])->name('Admin.Book.indexBook');
     Route::get('/CreateBook', [BookController::class, 'showCreateBook'])->name('Admin.Book.createBook');
+    Route::post('/', [BookController::class, 'createBook'])->name('Book.CreateBook');
     Route::get('/EditBook', [BookController::class, 'showEditBook'])->name('Admin.Book.editBook');
 });
 

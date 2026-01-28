@@ -19,7 +19,7 @@
             </h2>
 
             {{-- ✅ POST ke store --}}
-            <form action="{{ route('Admin.Book.indexBook') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('Book.CreateBook') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 {{-- Cover Buku --}}
