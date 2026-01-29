@@ -66,7 +66,22 @@ Route::prefix('Transaction')->group(function () {
 Route::prefix('Member')->group(function () {
     Route::get('/', [MemberController::class, 'showIndexMembers'])
         ->name('Admin.Member.indexMember');
-        
+
     Route::get('/CreateMember', [MemberController::class, 'showCreateMembers'])
         ->name('Admin.Member.createMember');
+
+    Route::post('/', [MemberController::class, 'createMember'])
+        ->name('Member.CreateMember');
+});
+
+// User Dashboard Routes
+use App\Http\Controllers\User\DashboardUserController;
+
+
+
+Route::prefix('user')->name('User.')->group(function () {
+
+    Route::get('/dashboard', [DashboardUserController::class, 'showIndexUsers'])
+        ->name('dashboard');
+
 });

@@ -14,7 +14,7 @@
     <div class="flex min-h-screen">
         @include('Components.mainMenu')
 
-        <main class="ml-64 h-screen overflow-y-auto p-8">
+        <main class="ml-64 w-full overflow-y-auto p-8">
             <header class="mb-8 flex justify-between items-center">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-800">Kelola Anggota</h1>
@@ -45,13 +45,6 @@
             <section class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="p-6 border-b border-gray-100 flex justify-between items-center">
                     <h3 class="text-lg font-bold text-gray-800">Daftar Anggota</h3>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="ph ph-magnifying-glass text-gray-400"></i>
-                        </span>
-                        <input type="text" placeholder="Cari nama atau ID..."
-                            class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm">
-                    </div>
                 </div>
 
                 <div class="overflow-x-auto">

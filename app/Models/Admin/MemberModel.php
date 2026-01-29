@@ -11,6 +11,6 @@ class MemberModel extends Model
     protected $fillable = [
         'name',
         'email',
-        'role'
+        'password',
     ];
 }

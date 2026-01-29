@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\MemberModel;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
@@ -29,9 +30,18 @@ class MemberController extends Controller
     {
         return view('Admin.Member.createMember');
     }
-    public function create()
+    public function createMember(Request $request)
     {
-        //
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
+        ]);
+
+        MemberModel::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make('password123'), // Set password default 'password'
+        ]);
     }
 
     /**
