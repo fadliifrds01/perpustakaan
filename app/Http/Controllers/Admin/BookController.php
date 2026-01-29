@@ -110,6 +110,7 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
+        // Cari data berdasarkan ID
         $book = BookModel::findOrFail($id);
         $book->delete();
 
