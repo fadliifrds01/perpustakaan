@@ -39,7 +39,8 @@
                 </a>
 
                 <div class="mt-10 px-6">
-                    <form action="{{ route('Auth.login') }}" method="GET">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
                         <button class="flex items-center text-red-500 hover:text-red-700 font-medium">
                             <i class="ph ph-sign-out text-xl mr-3"></i>
                             Logout
@@ -51,6 +52,12 @@
 
         <main class="flex-1 p-10">
             <header class="mb-8">
+                @auth
+                    <p>Hallo, {{ Auth::user()->name }}!</p>
+                @endauth
+                @guest
+                    <p style="color: red;">Silakan login terlebih dahulu.</p>
+                @endguest
                 <h1 class="text-3xl font-bold text-gray-800">Selamat Datang Di, Dashboard Admin!</h1>
                 <p class="text-gray-500">Ringkasan aktivitas perpustakaan Anda hari ini.</p>
             </header>

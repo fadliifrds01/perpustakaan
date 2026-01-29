@@ -19,7 +19,12 @@ use App\Http\Controllers\Admin\MemberController;
 
 
 // Auth Routes
-Route::get('/', [LoginController::class, 'showController'])->name('Auth.login');
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginController::class, 'showController'])->name('Auth.login');
+    Route::post('/login', [LoginController::class, 'login'])->name('Auth.loginUser');
+});
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showController'])->name('Auth.register');
 
 // Dashboard Admin Routes

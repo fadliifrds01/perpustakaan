@@ -14,12 +14,12 @@
             <p class="text-gray-500">Silakan masuk ke akun Anda</p>
         </div>
 
-        <form action="{{ route('Auth.login') }}" method="POST">
+        <form action="{{ route('Auth.loginUser') }}" method="POST">
             @csrf
 
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
-                <input type="email" id="email" name="email" required
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     placeholder="nama@email.com">
             </div>
@@ -31,10 +31,18 @@
                     placeholder="••••••••">
             </div>
 
-            <a href="{{ route('Admin.dashboard') }}"
+            @error('email')
+                <div style="color: red;">{{ $message }}</div>
+            @enderror
+
+            <!-- <a href="{{ route('Admin.dashboard') }}"
                 class="w-full bg-blue-600 inline-block hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200 text-center">
                 Masuk
-            </a>
+            </a> -->
+            <button type="submit" 
+                class="w-full bg-blue-600 inline-block hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200 text-center">
+                Masuk
+            </button>
         </form>
 
         <p class="text-center text-sm text-gray-600 mt-8">
