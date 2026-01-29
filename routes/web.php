@@ -23,9 +23,11 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [LoginController::class, 'showController'])->name('Auth.login');
     Route::post('/login', [LoginController::class, 'login'])->name('Auth.loginUser');
 });
+Route::post('/logout', [LoginController::class, 'logout'])->name('Auth.logout');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Registrasi
 Route::get('/register', [RegisterController::class, 'showController'])->name('Auth.register');
+Route::post('/register', [RegisterController::class, 'register'])->name('Auth.registerUser');
 
 // Dashboard Admin Routes
 Route::get('/dashboard', [DashboardController::class, 'showController'])->name('Admin.dashboard');
