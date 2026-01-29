@@ -61,7 +61,7 @@
                     Tambah Buku
                 </a>
             </div>
-            
+
             <!-- UNTK MENAMPILKAN PESAN ERROR/SUKSES -->
             @include('Components.alerts')
 
@@ -136,14 +136,18 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center gap-3">
-                                        <a href="{{ route('Admin.Book.editBook') }}"
+                                        <a href="{{ route('Admin.Book.editBook', $book->id) }}"
                                             class="text-blue-600 hover:text-blue-800"><i
                                                 class="ph ph-pencil-line text-xl"></i></a>
-                                        <a href="{{ route('Book.DeleteBook', $book->id) }}"
-                                            class="text-red-500 hover:text-red-600" title="Hapus"
-                                            onclick="return confirm('Yakin ingin menghapus buku ini?')">
-                                            <i class="ph ph-trash text-xl"></i>
-                                        </a>
+                                        <form action="{{ route('Book.destroy', $book->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500 hover:text-red-600"
+                                                title="Hapus"
+                                                onclick="return confirm('Yakin ingin menghapus buku ini?')">
+                                                <i class="ph ph-trash text-xl"></i>
+                                            </button>
+                                        </form>
 
                                     </div>
                                 </td>

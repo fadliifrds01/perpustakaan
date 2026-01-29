@@ -27,20 +27,39 @@ Route::get('/dashboard', [DashboardController::class, 'showController'])->name('
 
 // Book Routes
 Route::prefix('Book')->group(function () {
-    Route::get('/', [BookController::class, 'showIndexBook'])->name('Admin.Book.indexBook');
-    Route::get('/CreateBook', [BookController::class, 'showCreateBook'])->name('Admin.Book.createBook');
-    Route::post('/', [BookController::class, 'createBook'])->name('Book.CreateBook');
-    Route::get('/Delete/{id}', [BookController::class, 'destroy'])->name('Book.DeleteBook');
-    Route::get('/EditBook', [BookController::class, 'showEditBook'])->name('Admin.Book.editBook');
+    Route::prefix('Book')->group(function () {
+
+        Route::get('/', [BookController::class, 'showIndexBook'])
+            ->name('Admin.Book.indexBook');
+
+        Route::get('/CreateBook', [BookController::class, 'showCreateBook'])
+            ->name('Admin.Book.createBook');
+
+        Route::post('/', [BookController::class, 'createBook'])
+            ->name('Book.CreateBook');
+
+        Route::get('/EditBook/{id}', [BookController::class, 'showEditBook'])
+            ->name('Admin.Book.editBook');
+
+        Route::put('/Update/{id}', [BookController::class, 'updateBook'])
+            ->name('Book.updateBook');
+
+        Route::delete('/Delete/{id}', [BookController::class, 'destroy'])
+            ->name('Book.destroy');
+    });
 });
 
 // Transaction Routes
 Route::prefix('Transaction')->group(function () {
-    Route::get('/', [TranscationController::class, 'showIndexTransaction'])->name('Admin.Transaction.indexTransaction');
+    Route::get('/', [TranscationController::class, 'showIndexTransaction'])
+        ->name('Admin.Transaction.indexTransaction');
 });
 
 // Members Routes
 Route::prefix('Member')->group(function () {
-    Route::get('/', [MemberController::class, 'showIndexMembers'])->name('Admin.Member.indexMember');
-    Route::get('/CreateMember', [MemberController::class, 'showCreateMembers'])->name('Admin.Member.createMember');
+    Route::get('/', [MemberController::class, 'showIndexMembers'])
+        ->name('Admin.Member.indexMember');
+        
+    Route::get('/CreateMember', [MemberController::class, 'showCreateMembers'])
+        ->name('Admin.Member.createMember');
 });

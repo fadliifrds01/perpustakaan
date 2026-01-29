@@ -33,7 +33,7 @@
                     file:rounded-lg file:border-0
                     file:text-sm file:font-semibold
                     file:bg-blue-50 file:text-blue-600
-                    hover:file:bg-blue-100">
+                    hover:file:bg-blue-100" required>
                 </div>
 
                 {{-- Judul Buku --}}
@@ -43,7 +43,7 @@
                     </label>
                     <input type="text" name="judul_buku" value="{{ old('judul_buku') }}"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        placeholder="Masukkan judul buku">
+                        placeholder="Masukkan judul buku" required>
                 </div>
 
                 {{-- Pengarang --}}
@@ -53,7 +53,7 @@
                     </label>
                     <input type="text" name="pengarang" value="{{ old('pengarang') }}"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        placeholder="Masukkan nama pengarang">
+                        placeholder="Masukkan nama pengarang" required>
                 </div>
 
                 {{-- Penerbit --}}
@@ -63,7 +63,7 @@
                     </label>
                     <input type="text" name="penerbit" value="{{ old('penerbit') }}"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        placeholder="Masukkan nama penerbit">
+                        placeholder="Masukkan nama penerbit" required>
                 </div>
 
                 {{-- Tahun Terbit --}}
@@ -71,7 +71,7 @@
                     <label class="block text-sm font-semibold text-gray-600 mb-2">
                         Tahun Terbit
                     </label>
-                    <select name="tahun_terbit" class="w-full rounded-lg border border-gray-300 px-4 py-2">
+                    <select name="tahun_terbit" class="w-full rounded-lg border border-gray-300 px-4 py-2" required>
 
                         @for ($year = date('Y'); $year >= 1980; $year--)
                             <option value="{{ $year }}" name="" {{ old('tahun_terbit') == $year ? 'selected' : '' }}>
@@ -87,14 +87,14 @@
                     <label class="block text-sm font-semibold text-gray-600 mb-2">
                         Status
                     </label>
-                    <select name="status"
+                    <select name="status" required
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-                        <option value="tersedia" {{ old('status') == 'tersedia' ? 'selected' : '' }}>
+                        <option value="Tersedia" {{ old('status') == 'Tersedia' ? 'selected' : '' }}>
                             Tersedia
                         </option>
 
-                        <option value="dipinjam" {{ old('status') == 'dipinjam' ? 'selected' : '' }}>
+                        <option value="Dipinjam" {{ old('status') == 'Dipinjam' ? 'selected' : '' }}>
                             Dipinjam
                         </option>
                     </select>

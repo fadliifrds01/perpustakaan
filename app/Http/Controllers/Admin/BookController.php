@@ -9,112 +9,113 @@ use Illuminate\Support\Facades\Redirect;
 
 class BookController extends Controller
 {
+    /**
+     * LIST DATA
+     */
     public function showIndexBook()
     {
-        $books = BookModel::select(
-            'id',
-            'cover_buku',
-            'judul_buku',
-            'pengarang',
-            'penerbit',
-            'tahun_terbit',
-            'status'
-        )->get();
+        $books = BookModel::all();
+
         return view('Admin.Book.indexBook', compact('books'));
     }
+
+
+    /**
+     * FORM CREATE
+     */
     public function showCreateBook()
     {
         return view('Admin.Book.createBook');
     }
-    public function showEditBook()
-    {
-        return view('Admin.Book.editBook');
-    }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index() {}
+
 
     /**
-     * Show the form for creating a new resource.
+     * STORE DATA
      */
     public function createBook(Request $request)
     {
         $request->validate([
-            'cover_buku' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'judul_buku' => 'required|string|max:255',
-            'pengarang' => 'required|string|max:255',
-            'penerbit' => 'required|string|max:255',
+            'cover_buku'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'judul_buku'   => 'required|string|max:255',
+            'pengarang'    => 'required|string|max:255',
+            'penerbit'     => 'required|string|max:255',
             'tahun_terbit' => 'required|integer',
-            'status' => 'required|string|max:50',
+            'status'       => 'required|string|max:50',
         ]);
 
         $coverName = null;
+
         if ($request->hasFile('cover_buku')) {
             $file = $request->file('cover_buku');
             $coverName = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('upload'), $coverName);
         }
-        // if ($request->hasFile('cover_buku')) {
-        //     $coverName = $request->file('cover_buku')->store('covers', 'public');
-        //     $request->merge(['cover_buku' => $coverName]);
-        // }
-
 
         BookModel::create([
-            'cover_buku' => '/upload/' . $coverName,
-            'judul_buku' => $request->judul_buku,
-            'pengarang' => $request->pengarang,
-            'penerbit' => $request->penerbit,
+            'cover_buku'   => $coverName ? '/upload/' . $coverName : null,
+            'judul_buku'   => $request->judul_buku,
+            'pengarang'    => $request->pengarang,
+            'penerbit'     => $request->penerbit,
             'tahun_terbit' => $request->tahun_terbit,
-            'status' => $request->status,
+            'status'       => $request->status,
         ]);
+
         return redirect()->route('Admin.Book.indexBook')
-            ->with('success', 'Buku berhasil ditambahkan.');
+            ->with('success', 'Buku berhasil ditambahkan');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * FORM EDIT
      */
-    public function store(Request $request)
+    public function showEditBook($id)
     {
-        //
+        $book = BookModel::findOrFail($id);
+
+        return view('Admin.Book.editBook', compact('book'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Logika update book
+    public function updateBook(Request $request, $id)
     {
-        //
+        $request->validate([
+            'cover_buku'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'judul_buku'   => 'required|string|max:255',
+            'pengarang'    => 'required|string|max:255',
+            'penerbit'     => 'required|string|max:255',
+            'tahun_terbit' => 'required|integer',
+            'status'       => 'required|string|max:50',
+        ]);
+
+        $book = BookModel::findOrFail($id);
+
+        if ($request->hasFile('cover_buku')) {
+            $file = $request->file('cover_buku');
+            $coverName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('upload'), $coverName);
+
+            $book->cover_buku = '/upload/' . $coverName;
+        }
+
+        $book->update([
+            'judul_buku'   => $request->judul_buku,
+            'pengarang'    => $request->pengarang,
+            'penerbit'     => $request->penerbit,
+            'tahun_terbit' => $request->tahun_terbit,
+            'status'       => $request->status,
+        ]);
+
+        return redirect()->route('Admin.Book.indexBook')
+            ->with('success', 'Buku berhasil diperbarui');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Logika delete book
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        // Cari data berdasarkan ID
         $book = BookModel::findOrFail($id);
         $book->delete();
 
         return Redirect::route('Admin.Book.indexBook')
-            ->with('success', 'Buku berhasil dihapus.');
+            ->with('success', 'Buku berhasil dihapus');
     }
 }
