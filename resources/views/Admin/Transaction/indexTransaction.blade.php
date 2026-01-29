@@ -11,48 +11,9 @@
 
 <body class="bg-gray-100 font-sans antialiased">
 
-    <div class="flex min-h-screen">
+    <div class="ml-64 h-screen overflow-y-auto p-8">
         <!-- SIDEBAR -->
-        <aside class="w-64 bg-white shadow-md">
-            <div class="p-6">
-                <h2 class="text-xl font-bold italic text-blue-600">Admin Perpustakaan</h2>
-            </div>
-
-            <nav class="mt-4">
-                <a href="{{ route('Admin.dashboard') }}"
-                    class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600">
-                    <i class="ph ph-layout text-xl mr-3"></i>
-                    Dashboard
-                </a>
-
-                <a href="{{ route('Admin.Book.indexBook') }}"
-                    class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600">
-                    <i class="ph ph-books text-xl mr-3"></i>
-                    Kelola Data Buku
-                </a>
-
-                <a href="{{ route('Admin.Transaction.indexTransaction') }}"
-                    class="flex items-center px-6 py-3 bg-blue-50 text-blue-600 border-r-4 border-blue-600">
-                    <i class="ph ph-arrows-left-right text-xl mr-3"></i>
-                    <span class="font-semibold">Transaksi</span>
-                </a>
-
-                <a href="{{ route('Admin.Member.indexMember') }}"
-                    class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600">
-                    <i class="ph ph-users text-xl mr-3"></i>
-                    Kelola Anggota
-                </a>
-
-                <div class="mt-10 px-6">
-                    <form action="{{ route('Auth.login') }}" method="GET">
-                        <button class="flex items-center text-red-500 hover:text-red-700 font-medium">
-                            <i class="ph ph-sign-out text-xl mr-3"></i>
-                            Logout
-                        </button>
-                    </form>
-                </div>
-            </nav>
-        </aside>
+        @include('Components.mainMenu')
 
         <!-- MAIN -->
         <main class="flex-1 p-10">

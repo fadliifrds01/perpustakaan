@@ -11,44 +11,8 @@
 
 <body class="bg-gray-100 font-sans antialiased">
 
-    <div class="flex min-h-screen">
-        <aside class="w-64 bg-white shadow-md">
-            <div class="p-6">
-                <h2 class="text-xl font-bold italic text-blue-600">Admin Perpustakaan</h2>
-            </div>
-            <nav class="mt-4">
-                <a href="{{ route('Admin.dashboard') }}"
-                    class="flex items-center px-6 py-3 bg-blue-50 text-blue-600 border-r-4 border-blue-600">
-                    <i class="ph ph-layout text-xl mr-3"></i>
-                    <span class="font-semibold">Dashboard</span>
-                </a>
-                <a href="{{ route('Admin.Book.indexBook') }}"
-                    class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-100 ease-in">
-                    <i class="ph ph-books text-xl mr-3"></i>
-                    <span>Kelola Data Buku</span>
-                </a>
-                <a href="{{ route('Admin.Transaction.indexTransaction') }}"
-                    class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-100 ease-in">
-                    <i class="ph ph-arrows-left-right text-xl mr-3"></i>
-                    <span>Transaksi</span>
-                </a>
-                <a href="{{ route('Admin.Member.indexMember') }}"
-                    class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-100 ease-in">
-                    <i class="ph ph-users text-xl mr-3"></i>
-                    <span>Kelola Anggota</span>
-                </a>
-
-                <div class="mt-10 px-6">
-                    <form action="{{ route('Auth.logout') }}" method="POST">
-                        @csrf
-                        <button class="flex items-center text-red-500 hover:text-red-700 font-medium">
-                            <i class="ph ph-sign-out text-xl mr-3"></i>
-                            Logout
-                        </button>
-                    </form>
-                </div>
-            </nav>
-        </aside>
+    <div class="ml-64 h-screen overflow-y-auto p-8">
+        @include('Components.mainMenu')
 
         <main class="flex-1 p-10">
             <header class="mb-8">

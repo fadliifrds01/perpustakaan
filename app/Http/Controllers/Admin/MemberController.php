@@ -4,17 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin\MemberModel;
 
 class MemberController extends Controller
 {
     public function showIndexMembers()
     {
-        return view('Admin.Member.indexMember');
+        $members = MemberModel::all();
+        return view('Admin.Member.indexMember', compact('members'));
     }
-    public function showCreateMembers()
-    {
-        return view('Admin.Member.createMember');
-    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,15 +25,11 @@ class MemberController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function showCreateMembers()
     {
-        //
+        return view('Admin.Member.createMember');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create()
     {
         //
     }

@@ -30,7 +30,7 @@ class RegisterController extends Controller
         ]);
 
         // 3. Kembali ke halaman registrasi dengan pesan atau arahkan langsung ke login
-        return redirect('/register')->with('success', 'Pendaftaran berhasil! Silakan login.');
+        return redirect('/  register')->with('success', 'Pendaftaran berhasil! Silakan login.');
     }
 
     /**
