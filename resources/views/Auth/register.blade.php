@@ -46,12 +46,15 @@
                     placeholder="••••••••">
             </div>
 
+            <!-- UNTK MENAMPILKAN PESAN ERROR/SUKSES -->
+            @include('Components.alerts')
+
             <button type="submit"
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200">
                 Daftar Sekarang
             </button>
         </form>
-
+    
         <p class="text-center text-sm text-gray-600 mt-8">
             Sudah punya akun?
             <a href="{{ route('Auth.login') }}" class="text-blue-600 font-semibold hover:underline">Masuk di sini</a>
