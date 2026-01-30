@@ -74,14 +74,18 @@ Route::prefix('Member')->group(function () {
         ->name('Member.CreateMember');
 });
 
+
+
 // User Dashboard Routes
 use App\Http\Controllers\User\DashboardUserController;
-
-
+use App\Http\Controllers\User\BorrowBookController;
+use App\Http\Controllers\User\HistoryController;
 
 Route::prefix('user')->name('User.')->group(function () {
-
     Route::get('/dashboard', [DashboardUserController::class, 'showIndexUsers'])
         ->name('dashboard');
-
+    Route::get('/borrow-book', [BorrowBookController::class, 'showIndexBorrow'])
+        ->name('borrowBook');
+    Route::get('/history', [HistoryController::class, 'showIndexHistory'])
+        ->name('history');
 });
