@@ -12,7 +12,7 @@
 
 <body class="bg-gray-50 flex min-h-screen">
 
-    @include('Components.mainMenuUser');
+    @include('Components.mainMenuUser')
     {{-- =========================================== --}}
 
     {{-- MAIN CONTENT --}}
@@ -28,36 +28,56 @@
         {{-- Grid Buku --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            {{-- Card Buku --}}
-            <div class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="w-full h-40 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
-                    <i class="ph ph-code text-5xl text-blue-400"></i>
+            {{-- Card Buku 1 --}}
+            <div
+                class="group bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-full h-64 overflow-hidden rounded-xl mb-4 bg-gray-200">
+                    <img src="https://via.placeholder.com/300x400" alt="Cover Buku Laravel"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
-                <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">Laravel Dasar</h3>
+
+                <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">Laravel Dasar
+                </h3>
                 <p class="text-sm text-gray-400 mb-4">Belajar Framework PHP paling populer di dunia.</p>
-                <button class="w-full bg-gray-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl transition-colors">
+
+                <button
+                    class="w-full bg-gray-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl transition-colors">
                     Pinjam Sekarang
                 </button>
             </div>
 
-            <div class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="w-full h-40 bg-yellow-100 rounded-lg mb-4 flex items-center justify-center">
-                    <i class="ph ph-scroll text-5xl text-yellow-400"></i>
+            {{-- Card Buku 2 --}}
+            <div
+                class="group bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-full h-64 overflow-hidden rounded-xl mb-4 bg-gray-200">
+                    <img src="https://via.placeholder.com/300x400" alt="Cover Buku JS"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
-                <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">JavaScript Pemula</h3>
+
+                <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">JavaScript
+                    Pemula</h3>
                 <p class="text-sm text-gray-400 mb-4">Logika dasar pemrograman web interaktif.</p>
-                <button class="w-full bg-gray-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl transition-colors">
+
+                <button
+                    class="w-full bg-gray-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl transition-colors">
                     Pinjam Sekarang
                 </button>
             </div>
 
-            <div class="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div class="w-full h-40 bg-indigo-100 rounded-lg mb-4 flex items-center justify-center">
-                    <i class="ph ph-palette text-5xl text-indigo-400"></i>
+            {{-- Card Buku 3 --}}
+            <div
+                class="group bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-full h-64 overflow-hidden rounded-xl mb-4 bg-gray-200">
+                    <img src="https://via.placeholder.com/300x400" alt="Cover Buku Tailwind"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
-                <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">Tailwind CSS</h3>
+
+                <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">Tailwind CSS
+                </h3>
                 <p class="text-sm text-gray-400 mb-4">Cara modern mendesain website dengan cepat.</p>
-                <button class="w-full bg-gray-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl transition-colors">
+
+                <button
+                    class="w-full bg-gray-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl transition-colors">
                     Pinjam Sekarang
                 </button>
             </div>
@@ -67,4 +87,5 @@
     </main>
 
 </body>
+
 </html>
