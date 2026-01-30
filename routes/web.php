@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookController;
 
 // Transaction Import Controllers
-use App\Http\Controllers\Admin\TranscationController;
+use App\Http\Controllers\Admin\TransactionController;
 
 // Members Import Controllers
 use App\Http\Controllers\Admin\MemberController;
@@ -58,7 +58,7 @@ Route::prefix('Book')->group(function () {
 
 // Transaction Routes
 Route::prefix('Transaction')->group(function () {
-    Route::get('/', [TranscationController::class, 'showIndexTransaction'])
+    Route::get('/', [TransactionController::class, 'showIndexTransaction'])
         ->name('Admin.Transaction.indexTransaction');
 });
 

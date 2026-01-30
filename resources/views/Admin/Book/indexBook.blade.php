@@ -71,7 +71,7 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-4">
                                         <img src={{ asset($book->cover_buku) }} alt="Cover Buku"
-                                            class="object-cover rounded-sm shadow">
+                                            class="object-cover w-15 h-25 rounded-sm shadow">
                                     </div>
                                 </td>
 

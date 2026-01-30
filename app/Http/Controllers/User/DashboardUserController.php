@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User\DashboardUserModel;
 use Illuminate\Http\Request;
 
 class DashboardUserController extends Controller
@@ -12,7 +13,8 @@ class DashboardUserController extends Controller
      */
     public function showIndexUsers()
     {
-        return view('User.dashboardUser');
+        $books = DashboardUserModel::all();
+        return view('User.dashboardUser', compact('books'));
     }
 
     /**
