@@ -40,7 +40,7 @@ class MemberController extends Controller
         MemberModel::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            'password' => Hash::make('password123'), // Set password default 'password'
+            'password' => Hash::make('password123'), // Set password default 'password123'
         ]);
     }
 

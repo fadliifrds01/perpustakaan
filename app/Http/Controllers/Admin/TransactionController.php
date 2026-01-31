@@ -11,9 +11,8 @@ class TransactionController extends Controller
     public function showIndexTransaction()
     {
         // dd(TransactionModel::with(['users','book'])->first());
-    $transactions = TransactionModel::with(['user', 'book'])->get();
+        $transactions = TransactionModel::with(['user', 'book'])->get();
 
         return view('Admin.Transaction.indexTransaction', compact('transactions'));
     }
 }
-
