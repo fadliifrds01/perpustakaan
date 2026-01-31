@@ -12,7 +12,9 @@
 <body class="bg-gray-100 font-sans antialiased">
 
     <div class="flex min-h-screen">
-        @include('Components.mainMenu')
+        {{-- ================= SIDEBAR ================= --}}
+        @include('Components.mainMenu');
+        {{-- =========================================== --}}
 
         <main class="ml-64 h-screen overflow-y-auto p-8">
             <div class="flex justify-between items-center mb-8">
@@ -70,7 +72,7 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-4">
-                                        <img src={{ asset($book->cover_buku) }} alt="Cover Buku"
+                                        <img src="{{ asset($book->cover_buku) }}" alt="Cover Buku"
                                             class="object-cover w-15 h-25 rounded-sm shadow">
                                     </div>
                                 </td>

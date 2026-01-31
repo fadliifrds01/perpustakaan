@@ -12,7 +12,8 @@
 
 <body class="bg-gray-50 flex min-h-screen">
 
-    @include('Components.mainMenuUser')
+    {{-- ================= SIDEBAR ================= --}}
+    @include('Components.mainMenu');
     {{-- =========================================== --}}
 
     {{-- MAIN CONTENT --}}
@@ -25,10 +26,14 @@
             <p class="text-gray-500 mt-1">Temukan buku favoritmu dan mulai membaca hari ini.</p>
         </header>
 
+        <!-- UNTK MENAMPILKAN PESAN ERROR/SUKSES -->
+        @include('Components.alerts')
+  
         {{-- Grid Buku --}}
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            @foreach ($books as $book)
+            @forelse ($books as $book)
+                <!-- Tampilan jika buku ADA -->
                 {{-- Card Utama --}}
                 <div
                     class="group bg-white p-4 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-300">
@@ -53,14 +58,26 @@
                         <p class="text-sm text-gray-400 mb-5">Tersedia untuk dipinjam</p>
 
                         {{-- Tombol Modern --}}
-                        <button
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-2xl shadow-lg shadow-blue-100 flex items-center justify-center gap-2 transition-all active:scale-95">
-                            Pinjam Buku
-                        </button>
+                        <form action="{{ route('Admin.Transaction.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <button type="submit"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-2xl shadow-lg shadow-blue-100 flex items-center justify-center gap-2 transition-all active:scale-95"
+                                onclick="return confirm('Yakin ingin meminjam buku ini?')">
+                                Pinjam Buku
+                            </button>
+                        </form>
                     </div>
 
                 </div>
-            @endforeach
+            @empty
+                <!-- Tampilan jika buku KOSONG -->
+                <div class="col-span-full flex flex-col items-center justify-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                    <i class="ph ph-books text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-500">Wah, buku tidak ditemukan!</h3>
+                    <p class="text-gray-400">Saat ini tidak ada buku yang berstatus Tersedia.</p>
+                </div>
+            @endforelse
         </div>
 
 

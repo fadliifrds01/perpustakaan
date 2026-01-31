@@ -17,8 +17,13 @@ use App\Http\Controllers\Admin\TransactionController;
 // Members Import Controllers
 use App\Http\Controllers\Admin\MemberController;
 
+// User Dashboard Routes
+use App\Http\Controllers\User\DashboardUserController;
+use App\Http\Controllers\User\BorrowBookController;
+use App\Http\Controllers\User\HistoryController;
 
-// Auth Routes
+
+// Route untuk Guest (Belum Login)
 Route::middleware('guest')->group(function () {
     Route::get('/', [LoginController::class, 'showController'])->name('Auth.login');
     Route::post('/login', [LoginController::class, 'login'])->name('Auth.loginUser');
@@ -29,8 +34,11 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('Auth.logout');
 Route::get('/register', [RegisterController::class, 'showController'])->name('Auth.register');
 Route::post('/register', [RegisterController::class, 'register'])->name('Auth.registerUser');
 
-// Dashboard Admin Routes
-Route::get('/dashboard', [DashboardController::class, 'showController'])->name('Admin.dashboard');
+// Route untuk Admin (Sudah Login & Role Admin)
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('Admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'showIndexAdmin'])
+        ->name('dashboard');
+});
 
 // Book Routes
 Route::prefix('Book')->group(function () {
@@ -60,31 +68,29 @@ Route::prefix('Book')->group(function () {
 Route::prefix('Transaction')->group(function () {
     Route::get('/', [TransactionController::class, 'showIndexTransaction'])
         ->name('Admin.Transaction.indexTransaction');
+    Route::post('/', [TransactionController::class, 'store'])
+        ->name('Admin.Transaction.store');
+    Route::put('/transaction/{id}/return', [TransactionController::class, 'returnBook'])
+    ->name('Admin.Transaction.returnBook');
+    Route::post('/transaction/again', [TransactionController::class, 'storeAgain'])
+        ->name('Admin.Transaction.storeAgain');
 });
 
 // Members Routes
 Route::prefix('Member')->group(function () {
     Route::get('/', [MemberController::class, 'showIndexMembers'])
         ->name('Admin.Member.indexMember');
-
     Route::get('/CreateMember', [MemberController::class, 'showCreateMembers'])
         ->name('Admin.Member.createMember');
-
     Route::post('/', [MemberController::class, 'createMember'])
         ->name('Member.CreateMember');
 });
 
-
-
-// User Dashboard Routes
-use App\Http\Controllers\User\DashboardUserController;
-use App\Http\Controllers\User\BorrowBookController;
-use App\Http\Controllers\User\HistoryController;
-
-Route::prefix('user')->name('User.')->group(function () {
+// Route untuk Member (Sudah Login & Role Member)
+Route::middleware(['auth', 'role:member'])->prefix('user')->name('User.')->group(function () {
     Route::get('/dashboard', [DashboardUserController::class, 'showIndexUsers'])
         ->name('dashboard');
-    Route::get('/borrow-book', [BorrowBookController::class, 'showIndexBorrow'])
+     Route::get('/borrow-book', [BorrowBookController::class, 'showIndexBorrow'])
         ->name('borrowBook');
     Route::get('/history', [HistoryController::class, 'showIndexHistory'])
         ->name('history');

@@ -13,7 +13,8 @@ class DashboardUserController extends Controller
      */
     public function showIndexUsers()
     {
-        $books = DashboardUserModel::all();
+        // $books = DashboardUserModel::all(); // untuk ambil semua data
+        $books = DashboardUserModel::where('status', 'Tersedia')->get(); // untuk ambil berdasarkan status
         return view('User.dashboardUser', compact('books'));
     }
 

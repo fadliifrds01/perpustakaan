@@ -12,8 +12,9 @@
 <body class="bg-gray-100 font-sans antialiased">
 
     <div class="ml-64 h-screen overflow-y-auto p-8">
-        <!-- SIDEBAR -->
-        @include('Components.mainMenu')
+        {{-- ================= SIDEBAR ================= --}}
+        @include('Components.mainMenu');
+        {{-- =========================================== --}}
 
         <!-- MAIN -->
         <main class="flex-1 p-10">
@@ -64,12 +65,12 @@
                     <thead class="bg-gray-50 border-b">
                         <tr>
                             <th class="px-6 py-4 text-sm font-semibold text-gray-600">No</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600">Nama Anggota</th>
+                            <th class="px-6 py-4 text-sm font-semibold text-gray-600">Nama Peminjam</th>
                             <th class="px-6 py-4 text-sm font-semibold text-gray-600">Buku</th>
                             <th class="px-6 py-4 text-sm font-semibold text-gray-600">Judul Buku</th>
                             <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Tgl Pinjam</th>
                             <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Tgl Kembali</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Status</th>
+                            <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Keterangan</th>
                             {{-- <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Aksi</th> --}}
                         </tr>
                     </thead>
@@ -78,22 +79,17 @@
                         @foreach ($transactions as $trx)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $trx->users->name }}</td>
+                                <td class="px-6 py-4">{{ $trx->user->name }}</td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-4">
                                         <img src="{{ asset($trx->book->cover_buku) }}" alt="Cover Buku"
                                             class="w-14 h-20 object-cover rounded-md shadow">
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">Laskar Pelangi</td>
-                                <td class="px-6 py-4 text-center">21-01-2026</td>
-                                <td class="px-6 py-4 text-center">28-01-2026</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span
-                                        class="bg-yellow-100 text-yellow-600 px-2 py-1 text-xs rounded-full font-semibold">
-                                        Dipinjam
-                                    </span>
-                                </td>
+                                <td class="px-6 py-4">{{ $trx->book->judul_buku }}</td>
+                                <td class="px-6 py-4 text-center">{{ $trx->tanggal_pinjam }}</td>
+                                <td class="px-6 py-4 text-center">{{ $trx->tanggal_kembali }}</td>
+                                <td class="px-6 py-4 text-center">{{ $trx->tanggal_kembali == '' ? 'Belum dikembalikan' : 'Sudah dekembalikan' }}</td>
                                 {{-- <td class="px-6 py-4 text-center">
                                 <button class="text-green-600 hover:text-green-700">
                                     <i class="ph ph-check-circle text-xl"></i>

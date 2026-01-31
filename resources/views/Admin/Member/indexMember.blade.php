@@ -12,7 +12,9 @@
 <body class="bg-gray-100 font-sans antialiased">
 
     <div class="flex min-h-screen">
-        @include('Components.mainMenu')
+        {{-- ================= SIDEBAR ================= --}}
+        @include('Components.mainMenu');
+        {{-- =========================================== --}}
 
         <main class="ml-64 w-full overflow-y-auto p-8">
             <header class="mb-8 flex justify-between items-center">

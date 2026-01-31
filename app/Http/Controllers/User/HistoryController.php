@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin\TransactionModel;
 
 class HistoryController extends Controller
 {
@@ -12,7 +13,12 @@ class HistoryController extends Controller
      */
     public function showIndexHistory()
     {
-        return view('User.historyBook');
+        // Ambil transaksi berdasarkan id user & tanggal dikembalikan sudah terisi, sertakan data user dan buku
+        $historyBorroweds = TransactionModel::with(['user', 'book'])
+            ->where('user_id', auth()->id())
+            ->whereNotNull('tanggal_kembali')
+            ->get();
+        return view('User.historyBook', compact('historyBorroweds'));
     }
 
     /**
