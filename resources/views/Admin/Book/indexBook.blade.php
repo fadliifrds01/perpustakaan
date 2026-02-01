@@ -176,7 +176,7 @@
 
                                 <form action="{{ route('Book.destroy', $book->id) }}" method="POST">
                                     @csrf @method('DELETE')
-                                    <button class="text-red-500">
+                                    <button class="text-red-500" onclick="return confirm('Yakin ingin menghapus buku ini?')">
                                         Hapus
                                     </button>
                                 </form>

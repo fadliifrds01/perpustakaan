@@ -192,14 +192,14 @@
 
                 <div class="flex gap-6 mt-4 text-sm font-medium">
 
-                    <a href=""
+                    <a href="{{ route('Admin.Member.editMember', $member->id) }}"
                         class="text-blue-600">
                         Edit
                     </a>
 
                     <form action="{{ route('Member.destroy', $member->id) }}" method="POST">
                         @csrf @method('DELETE')
-                        <button class="text-red-500">
+                        <button class="text-red-500" onclick="return confirm('Yakin ingin menghapus anggota ini?')">
                             Hapus
                         </button>
                     </form>
