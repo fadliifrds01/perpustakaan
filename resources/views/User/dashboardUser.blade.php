@@ -10,59 +10,71 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-50 flex min-h-screen">
+<body class="bg-gray-50 min-h-screen flex">
 
-    @include('Components.mainMenuUser')
+    {{-- ================= SIDEBAR ================= --}}
+    @include('Components.mainMenu')
     {{-- =========================================== --}}
 
     {{-- MAIN CONTENT --}}
-    <main class="flex-1 ml-64 p-10">
+    <main class="flex-1 w-full lg:ml-64 p-4 sm:p-6 lg:p-10">
 
-        <header class="mb-10">
-            <h1 class="text-3xl font-extrabold text-gray-800">
+        <header class="mb-6 lg:mb-10 mt-20 md:mt-0">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-800">
                 📚 Daftar Buku
             </h1>
-            <p class="text-gray-500 mt-1">Temukan buku favoritmu dan mulai membaca hari ini.</p>
+            <p class="text-gray-500 text-sm mt-1">
+                Temukan buku favoritmu dan mulai membaca hari ini.
+            </p>
         </header>
 
-        {{-- Grid Buku --}}
+        @include('Components.alerts')
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            @foreach ($books as $book)
-                {{-- Card Utama --}}
-                <div
-                    class="group bg-white p-4 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-300">
+        {{-- GRID RESPONSIVE (rapi di semua device) --}}
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
 
-                    {{-- Area Tampilan Buku (Bentuk Sempurna) --}}
+            @forelse ($books as $book)
+                <div class="group bg-white p-3 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition">
+
+                    {{-- Cover --}}
                     <div
-                        class="relative w-full aspect-[3/4] bg-gray-50 rounded-2xl overflow-hidden flex items-center justify-center p-4">
-                        {{-- Efek Bayangan Rak --}}
-                        <div class="absolute bottom-0 w-full h-8 bg-gradient-to-t from-gray-200/50 to-transparent">
-                        </div>
-
-                        <img src="{{ asset( $book->cover_buku) }}" alt="{{ $book->judul_buku }}"
-                            class="max-w-full max-h-full object-contain shadow-[10px_10px_20px_rgba(0,0,0,0.2)] group-hover:scale-105 transition-transform duration-500">
+                        class="relative w-full aspect-[3/4] bg-gray-50 rounded-xl flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset($book->cover_buku) }}" alt="{{ $book->judul_buku }}"
+                            class="object-contain max-h-full group-hover:scale-105 transition">
                     </div>
 
-                    {{-- Detail & Button di dalam Card --}}
-                    <div class="mt-5 px-2 pb-2">
-                        <h3
-                            class="text-lg font-bold text-gray-800 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                    {{-- Detail --}}
+                    <div class="mt-3">
+                        <h3 class="text-sm font-bold line-clamp-1 text-gray-800 group-hover:text-blue-600">
                             {{ $book->judul_buku }}
                         </h3>
-                        <p class="text-sm text-gray-400 mb-5">Tersedia untuk dipinjam</p>
 
-                        {{-- Tombol Modern --}}
-                        <button
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-2xl shadow-lg shadow-blue-100 flex items-center justify-center gap-2 transition-all active:scale-95">
-                            Pinjam Buku
-                        </button>
+                        <p class="text-xs text-gray-400 mb-3">
+                            Tersedia untuk dipinjam
+                        </p>
+
+                        <form action="{{ route('Admin.Transaction.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+
+                            <button type="submit"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2 rounded-lg transition"
+                                onclick="return confirm('Yakin ingin meminjam buku ini?')">
+                                Pinjam
+                            </button>
+                        </form>
                     </div>
 
                 </div>
-            @endforeach
-        </div>
 
+            @empty
+
+                <div class="col-span-full text-center py-16 text-gray-400">
+                    Buku tidak ditemukan
+                </div>
+            @endforelse
+
+        </div>
 
     </main>
 

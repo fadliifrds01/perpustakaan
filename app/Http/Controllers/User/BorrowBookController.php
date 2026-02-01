@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\TransactionModel;
 
 class BorrowBookController extends Controller
 {
@@ -12,7 +14,16 @@ class BorrowBookController extends Controller
      */
     public function showIndexBorrow()
     {
-        return view('User.borrowBook');
+        // Ambil transaksi berdasarkan id user & status 'Dipinjam', sertakan data user dan buku
+        $borrowedBooks = TransactionModel::with(['user', 'book'])
+            ->where('user_id', auth()->id())
+            ->whereNull('tanggal_kembali')
+            ->whereHas('book', function ($query) {
+                $query->where('status', 'Dipinjam');
+            })
+            ->get();
+
+        return view('User.borrowBook', compact('borrowedBooks'));
     }
 
     /**

@@ -6,7 +6,7 @@
             x-data="{ show: true }"
             x-show="show"
             x-transition
-            x-init="setTimeout(() => show = false, 3000)"
+            x-init="setTimeout(() => show = false, 5000)"
             class="flex items-center gap-3 p-4 rounded-xl m-2 bg-green-100 border border-green-300 shadow-md text-green-800">
 
             {{-- Icon --}}

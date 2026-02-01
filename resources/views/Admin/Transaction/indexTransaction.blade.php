@@ -5,110 +5,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaksi Peminjaman - Perpustakaan</title>
-    @vite('resources/css/app.css')
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-100 font-sans antialiased">
+<body class="bg-gray-50 font-sans antialiased">
 
-    <div class="ml-64 h-screen overflow-y-auto p-8">
-        <!-- SIDEBAR -->
-        @include('Components.mainMenu')
+<div class="flex min-h-screen">
 
-        <!-- MAIN -->
-        <main class="flex-1 p-10">
+    {{-- ================= SIDEBAR ================= --}}
+    @include('Components.mainMenu')
+    {{-- =========================================== --}}
 
-            <!-- HEADER -->
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-800">Transaksi Peminjaman</h1>
-                <p class="text-gray-500 text-sm">
-                    Kelola peminjaman dan pengembalian buku
-                </p>
-            </div>
+    {{-- ================= CONTENT ================= --}}
+    <main class="flex-1 lg:ml-64 p-4 sm:p-6 lg:p-10">
 
-            <!-- FORM TRANSAKSI -->
-            {{-- <div class="bg-white p-6 rounded-xl shadow-sm border mb-10">
-                <h3 class="font-semibold text-gray-700 mb-4">Tambah Transaksi</h3>
+        {{-- ================= HEADER ================= --}}
+        <div class="mb-8 mt-20 md:mt-0">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">
+                Transaksi Peminjaman 📚
+            </h1>
+            <p class="text-gray-500 text-sm">
+                Kelola peminjaman dan pengembalian buku anggota
+            </p>
+        </div>
 
-                <form class="grid grid-cols-3 gap-4">
-                    <div>
-                        <label class="text-sm text-gray-600">Anggota</label>
-                        <select class="w-full mt-1 border rounded-lg px-3 py-2">
-                            <option>Pilih Anggota</option>
-                            <option>Fadli</option>
-                            <option>Andi</option>
-                        </select>
-                    </div>
 
-                    <div>
-                        <label class="text-sm text-gray-600">Buku</label>
-                        <select class="w-full mt-1 border rounded-lg px-3 py-2">
-                            <option>Pilih Buku</option>
-                            <option>Laskar Pelangi</option>
-                            <option>Bumi Manusia</option>
-                        </select>
-                    </div>
+        {{-- ===================================================== --}}
+        {{-- ================= DESKTOP TABLE ====================== --}}
+        {{-- ===================================================== --}}
+        <div class="hidden lg:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
-                    <div class="flex items-end">
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
-                            <i class="ph ph-plus-circle mr-2"></i>
-                            Pinjam Buku
-                        </button>
-                    </div>
-                </form>
-            </div> --}}
+            <table class="w-full text-sm">
 
-            <!-- TABEL TRANSAKSI -->
-            <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-50 border-b">
-                        <tr>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600">No</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600">Nama Anggota</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600">Buku</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600">Judul Buku</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Tgl Pinjam</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Tgl Kembali</th>
-                            <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Status</th>
-                            {{-- <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Aksi</th> --}}
+                <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+                    <tr>
+                        <th class="px-6 py-4">No</th>
+                        <th class="px-6 py-4">Nama</th>
+                        <th class="px-6 py-4 text-center">Cover</th>
+                        <th class="px-6 py-4">Judul Buku</th>
+                        <th class="px-6 py-4 text-center">Tgl Pinjam</th>
+                        <th class="px-6 py-4 text-center">Tgl Kembali</th>
+                        <th class="px-6 py-4 text-center">Status</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y">
+
+                    @foreach ($transactions as $trx)
+
+                        @php
+                            $status = $trx->tanggal_kembali
+                                ? ['Sudah dikembalikan', 'green']
+                                : ['Belum dikembalikan', 'red'];
+                        @endphp
+
+                        <tr class="hover:bg-gray-50 transition">
+
+                            <td class="px-6 py-4 font-semibold">
+                                {{ $loop->iteration }}
+                            </td>
+
+                            <td class="px-6 py-4">
+                                {{ $trx->user->name ?? '-' }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+                                <img src="{{ asset($trx->book->cover_buku) }}"
+                                     class="w-14 h-20 object-cover mx-auto rounded-lg shadow">
+                            </td>
+
+                            <td class="px-6 py-4 font-medium text-gray-800">
+                                {{ $trx->book->judul_buku }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+                                {{ $trx->tanggal_pinjam }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+                                {{ $trx->tanggal_kembali ?? '-' }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold
+                                    {{ $status[1] === 'green'
+                                        ? 'bg-green-100 text-green-600'
+                                        : 'bg-red-100 text-red-600' }}">
+                                    {{ $status[0] }}
+                                </span>
+                            </td>
+
                         </tr>
-                    </thead>
 
-                    <tbody class="divide-y">
-                        @foreach ($transactions as $trx)
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4">{{ $trx->users->name }}</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-4">
-                                        <img src="{{ asset($trx->book->cover_buku) }}" alt="Cover Buku"
-                                            class="w-14 h-20 object-cover rounded-md shadow">
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">Laskar Pelangi</td>
-                                <td class="px-6 py-4 text-center">21-01-2026</td>
-                                <td class="px-6 py-4 text-center">28-01-2026</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span
-                                        class="bg-yellow-100 text-yellow-600 px-2 py-1 text-xs rounded-full font-semibold">
-                                        Dipinjam
-                                    </span>
-                                </td>
-                                {{-- <td class="px-6 py-4 text-center">
-                                <button class="text-green-600 hover:text-green-700">
-                                    <i class="ph ph-check-circle text-xl"></i>
-                                </button>
-                            </td> --}}
-                            </tr>
-                            @endforeach
-                    </tbody>
+                    @endforeach
 
-                </table>
-            </div>
+                </tbody>
 
-        </main>
-    </div>
+            </table>
+        </div>
+
+
+
+        {{-- ===================================================== --}}
+        {{-- ================= MOBILE CARD ======================= --}}
+        {{-- ===================================================== --}}
+        <div class="lg:hidden space-y-4">
+
+            @foreach ($transactions as $trx)
+
+                @php
+                    $status = $trx->tanggal_kembali
+                        ? ['Sudah dikembalikan', 'green']
+                        : ['Belum dikembalikan', 'red'];
+                @endphp
+
+                <div class="bg-white rounded-2xl shadow-sm p-4 flex gap-4">
+
+                    {{-- Cover --}}
+                    <img src="{{ asset($trx->book->cover_buku) }}"
+                         class="w-20 h-28 object-cover rounded-lg shadow">
+
+                    {{-- Info --}}
+                    <div class="flex-1">
+
+                        <h3 class="font-bold text-gray-800 text-sm">
+                            {{ $trx->book->judul_buku }}
+                        </h3>
+
+                        <p class="text-xs text-gray-500 mt-1">
+                            Peminjam : {{ $trx->user->name ?? '-' }}
+                        </p>
+
+                        <p class="text-xs text-gray-500">
+                            Pinjam : {{ $trx->tanggal_pinjam }}
+                        </p>
+
+                        <p class="text-xs text-gray-500">
+                            Kembali : {{ $trx->tanggal_kembali ?? '-' }}
+                        </p>
+
+                        <span class="inline-block mt-2 px-3 py-1 text-xs rounded-full
+                            {{ $status[1] === 'green'
+                                ? 'bg-green-100 text-green-600'
+                                : 'bg-red-100 text-red-600' }}">
+                            {{ $status[0] }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </main>
+</div>
 
 </body>
-
 </html>

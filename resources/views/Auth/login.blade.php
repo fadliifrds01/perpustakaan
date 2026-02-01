@@ -35,10 +35,6 @@
                 <div style="color: red;">{{ $message }}</div>
             @enderror
 
-            <!-- <a href="{{ route('Admin.dashboard') }}"
-                class="w-full bg-blue-600 inline-block hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200 text-center">
-                Masuk
-            </a> -->
             <button type="submit" 
                 class="w-full bg-blue-600 inline-block hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200 text-center">
                 Masuk

@@ -22,7 +22,17 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard'); // arahkan ke halaman dashboar
+
+            // Ambil user yang baru saja login
+            $user = Auth::user();
+
+            // Kondisi pengalihan berdasarkan kolom 'role' di database
+            if ($user->role === 'admin') {
+                // jika role admin arahkan ke halaman dashboar admin
+                return redirect()->intended(route('Admin.dashboard'));
+            } 
+            // jika role selain admin, maka arahkan ke halaman dashboard user / member
+            return redirect()->intended(route('User.dashboard'));
         }
 
         // jika email / password salah

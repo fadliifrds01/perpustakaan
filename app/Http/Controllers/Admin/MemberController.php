@@ -73,6 +73,10 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = MemberModel::findOrFail($id);
+        $member->delete();
+
+        return redirect()->route('Admin.Member.indexMember')->
+        with('success', 'Anggota berhasil dihapus!');
     }
 }
