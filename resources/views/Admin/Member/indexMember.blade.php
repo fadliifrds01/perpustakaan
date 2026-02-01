@@ -130,7 +130,7 @@
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-4 text-lg">
 
-                                <a href=""
+                                <a href="{{ route('Admin.Member.editMember', $member->id) }}"
                                    class="text-blue-600 hover:text-blue-800">
                                     <i class="ph ph-pencil-line"></i>
                                 </a>

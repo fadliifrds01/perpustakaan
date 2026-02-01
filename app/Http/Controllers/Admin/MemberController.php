@@ -42,6 +42,9 @@ class MemberController extends Controller
             'email'    => $request->email,
             'password' => Hash::make('password123'), // Set password default 'password123'
         ]);
+
+        return redirect()->route('Admin.Member.indexMember')
+            ->with('success', 'Anggota berhasil ditambahkan!');
     }
 
     /**
@@ -55,17 +58,27 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function editMember(string $id)
     {
-        //
+        $member = MemberModel::findOrFail($id);
+        return view('Admin.Member.editMember', compact('member'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateMember(Request $request, string $id)
     {
-        //
+    $request = $request->validate([
+        'name'     => 'required|string|max:255',
+        'email'    => 'required|string|email|max:255|unique:users,email,' . $id,
+    ]);
+
+    $member = MemberModel::findOrFail($id);
+    $member->update($request);
+
+    return redirect()->route('Admin.Member.indexMember')
+        ->with('success', 'Anggota berhasil diperbarui!');
     }
 
     /**

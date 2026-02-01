@@ -84,6 +84,10 @@ Route::prefix('Member')->group(function () {
         ->name('Admin.Member.createMember');
     Route::post('/', [MemberController::class, 'createMember'])
         ->name('Member.CreateMember');
+    Route::get('/EditMember/{id}', [MemberController::class, 'editMember'])
+        ->name('Admin.Member.editMember');
+    Route::put('/Update/{id}', [MemberController::class, 'updateMember'])
+        ->name('Admin.Member.updateMember');
     Route::delete('/Delete/{id}', [MemberController::class, 'destroy'])
         ->name('Member.destroy');
 });
