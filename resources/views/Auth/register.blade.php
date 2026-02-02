@@ -10,6 +10,7 @@
 
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="text-center mb-8">
+            <img src="{{ asset('images/logo_skarisa.png') }}" alt="Logo SMK Krian 1" class="mx-auto mb-3 w-20 h-20"/>
             <h1 class="text-3xl font-bold text-blue-600">Daftar Akun</h1>
             <p class="text-gray-500">Buat akun untuk mulai meminjam buku</p>
         </div>
@@ -54,7 +55,7 @@
                 Daftar Sekarang
             </button>
         </form>
-    
+
         <p class="text-center text-sm text-gray-600 mt-8">
             Sudah punya akun?
             <a href="{{ route('Auth.login') }}" class="text-blue-600 font-semibold hover:underline">Masuk di sini</a>

@@ -14,9 +14,9 @@
         class="fixed top-0 left-0 right-0 h-16 bg-white shadow-md flex items-center justify-between px-5 z-40 lg:hidden">
 
         <div class="flex items-center gap-2">
-            <i class="ph-fill ph-book-open text-blue-600 text-2xl"></i>
+            <img src="{{ asset('images/logo_skarisa.png') }}" alt="Logo SMK Krian 1" class="w-8 h-8">
             <span class="font-bold text-blue-600 italic tracking-tight">
-                Perpustakaan
+                Perpustakaan Sekolah
             </span>
         </div>
 
@@ -39,10 +39,10 @@
                lg:translate-x-0">
 
         <!-- LOGO -->
-        <div class="p-6 flex items-center justify-between border-b">
-            <h2 class="text-xl font-bold text-blue-600 italic flex items-center gap-2">
-                <i class="ph-fill ph-book-open"></i>
-                Perpustakaan
+        <div class="p-4 flex items-center justify-between border-b">
+            <h2 class="text-lg font-bold text-blue-600 italic flex items-center gap-3">
+                <img src="{{ asset('images/logo_skarisa.png') }}" alt="Logo SMK Krian 1" class="w-8 sm:w-10 h-8 sm:h-10">
+                Perpustakaan Sekolah
             </h2>
 
             <button @click="open=false" class="lg:hidden text-gray-400 hover:text-black">

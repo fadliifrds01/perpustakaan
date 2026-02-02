@@ -10,8 +10,9 @@
 
     <div class="w-11/12 max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="text-center mb-8">
+            <img src="{{ asset('images/logo_skarisa.png') }}" alt="Logo SMK Krian 1" class="mx-auto mb-3 w-20 h-20"/>
             <h1 class="text-3xl font-bold text-blue-600">Login Perpustakaan</h1>
-            <p class="text-gray-500">Silakan masuk ke akun Anda</p>
+            <p class="text-gray-500">Silakan masuk ke akun Perpustakaan Anda</p>
         </div>
 
         <form action="{{ route('Auth.loginUser') }}" method="POST">
@@ -35,7 +36,7 @@
                 <div style="color: red;">{{ $message }}</div>
             @enderror
 
-            <button type="submit" 
+            <button type="submit"
                 class="w-full bg-blue-600 inline-block hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200 text-center">
                 Masuk
             </button>
